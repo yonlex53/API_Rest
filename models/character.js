@@ -1,6 +1,5 @@
 import { mongoose, Schema } from "mongoose";
 
-
 const characterSchema = new Schema({
     id: {
         type: Number,
