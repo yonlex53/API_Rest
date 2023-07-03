@@ -17,21 +17,23 @@ var port = 3700;
 async function dbConnection() {
     console.log('Intentando establecer conexión con la base de datos...')
     await mongoose.connect('mongodb://127.0.0.1:27017/Rick&Morty_API')
-    return new Promise((resolve, reject) => {
-        resolve('Conexión exitosa!');
-        reject('No se pudo conectar a la base de datos.')
-    })
+    return new Promise((resolve) => resolve('Conexión exitosa!') );
 }
+
 try {
     const dbConnect = await dbConnection();
     console.log(dbConnect);
-} catch (error) {
-    console.log('Error al conectar a la base de datos');
 }
-
-app.listen(port, ()=>{    
+catch(error) {
+    console.log('*******************************************\nHa ocurrido un error, no se pudo conectar a la base de datos! \nError: ', error.name, '\n*******************************************');
+}
+finally {
+    app.listen(port, ()=>{    
     console.log('Servidor iniciado!');
 })
+}
+
+
 
 //middlewares
 app.use(urlencoded({extended:false}));

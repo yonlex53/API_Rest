@@ -21,7 +21,7 @@ var APIController = {
     },
 
     getDocuments: async function (req, res, next) {
-        
+        console.log('Han hecho una petición')
         let category = req.params.category;
         let page = parseInt(req.params.page);
         let top = parseInt(page*20);
@@ -44,15 +44,17 @@ var APIController = {
             if(documents.length == 0) return res.status(404).send({
                 message: 'There is nothing here'
             });
-
-            return res.status(200).send({
+            
+            return res.status(200).json({
                 info: {
                     'documents': count,
                     'pages' : totalPages,
                     'next' : nextPage,
                     'prev' : prevPage
                 },
+                'typeof' : typeof documents, 
                 'results' : documents
+
             });
         } catch (error) {
             console.log('Error en la consulta')
